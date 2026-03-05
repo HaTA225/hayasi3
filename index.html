@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ 
+    <meta charset="UTF-8">
+    <title>ホームだー</title>
+    <meta name="" content="">
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image.png" href="profiru.png">
+
+      <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FAF9F6;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            /* 扉より後にもコンテンツを置けるように全体の高さを確保 */
+        }
+
+        /* アニメーション用のスクロール空間（例えば3画面分スクロールさせる） */
+        .scroll-container {
+            height: 200vh;
+            /* 300vh = 画面の高さの3倍。この分だけ下へスクロールできます */
+        }
+
+        /* 画面に固定されて動かないエリア */
+        .sticky-area {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            /* 画面枠いっぱいに表示 */
+            width: 100%;
+            overflow: hidden;
+            /* 扉が画面外にいくのを隠す */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000;
+            /* 扉の奥の空間（暗闇） */
+        }
+
+        /* 扉が開いた奥に表示されるコンテンツ */
+        .inner-content {
+            position: absolute;
+            z-index: 1;
+            /* 扉より奥 */
+            color: white;
+            text-align: center;
+        }
+
+        .inner-content h1 {
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 0.1em;
+        }
+
+        /* 扉全体のラッパー */
+        .doors-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            /* 横に並べる */
+            z-index: 2;
+            /* コンテンツより手前 */
+        }
+
+        /* 左右の扉の共通スタイル */
+        .door {
+            width: 50%;
+            height: 100%;
+            background-image: url(ki.png);
+            /* 現在のサイトの基調色に設定 */
+            position: relative;
+            /* 影で立体感を出す */
+            box-shadow: inset 0 0 50px rgba(200, 102, 53, 0.842);
+            border: 2px solid #d25656;
+            box-sizing: border-box;
+
+            /* JSでtransformの値を変更して動かします */
+            will-change: transform;
+            background-repeat: no-repeat;
+            background-size: 95%;
+            top: 50px;
+        }
+
+        .door.left {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-right: 4px solid #ffffff;
+            /* 隙間 */
+        }
+
+        .door.right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border-left: 4px solid #ffffff;
+            /* 隙間 */
+        }
+
+        /* 両開きの扉の取っ手（装飾） */
+        .door-handle {
+            width: 15px;
+            height: 120px;
+            background: linear-gradient(to right, #e6c27a, #d4af37, #997a00);
+            /* ゴールド系の色 */
+            border-radius: 8px;
+            margin: 0 40px;
+            /* 扉の中心からの距離 */
+            box-shadow: 2px 5px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* スクロールし終わったあとの下部コンテンツ領域（任意） */
+        .content-after-door {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FAF9F6;
+        }
+
+        .content-after-door h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            font-weight: normal;
+        }
+    </style>
+</head>
+ 
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+       
+        <a href="index.html">
+        <img src="haysi god man.png" alt="rogo" class="logo">
+        </a>
+     
+        <nav class="header-nav">
+            <a href="index.html">プロフィール</a>
+            <a href="hobby.html">趣味</a>
+            <a href="works.html">作品一覧</a>
+            <a href="winter.html">冬休みにしたこと</a>
+        </nav>
+    </header>
+
+      <div class="scroll-container">
+
+        <!-- 画面に追従して固定されるエリア -->
+        <div class="sticky-area">
+
+            <!-- 扉の奥にあるコンテンツ -->
+            <div class="inner-content">
+                <h1>Welcome<br>
+                    to the Welcome</h1>
+                
+            </div>
+
+            <!-- 左右の扉 -->
+            <div class="doors-wrapper">
+                <div class="door left" id="doorLeft">
+                    <div class="door-handle"></div>
+                </div>
+                <div class="door right" id="doorRight">
+                    <div class="door-handle"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+ 
+ 
+   
+    <div class="slider-container">
+        <div class="slider-track" id="slider-track">
+            <a href="index.html" class="slide-image"><img src="jigazou.png" alt="画像1" class="slide-images"></a>
+            <a href="hobby.html" class="slide-image"><img src="playstation.png" alt="画像2" class="slide-images"></a>
+            <a href="works.html" class="slide-image"><img src="haysi god man.png" alt="画像3" class="slide-images"></a>
+            <a href="winter.html" class="slide-image"><img src="yukidaruma.png" alt="画像4" class="slide-images"></a>
+        </div>
+    </div>
+ 
+    <div class="button-container">
+        <button id="prev-btn">⬅ 前へ</button>
+        <button id="next-btn">次へ ➡</button>
+    </div>
+ 
+    <script src="./javascript.js"></script>
+
+        <h2 class="profile-title">プロフィール</h2>
+
+        <img src="kao.jpg" alt="kao" class="kao">
+
+        <p class="profile-text">
+            はじめまして!<br>岐阜市を拠点に活動している 林 拓海 です。<br>
+            <br>
+            好奇心旺盛で、新しいことに挑戦するのが好きです。最近はDead by Daylightというgameに夢中で、時間を忘れて取り組んでいます。<br>
+            <br>
+            まだサイト制作は未熟ですが、今後成長していけるように隙間時間で作っていきたいと思います！<br>
+            <br>
+            このサイトでは、私の活動や考えていることをゆるやかに発信していきます。どうぞ気軽にのぞいていってください。
+
+        </p>
+    </div>
+
+    <div class="form-container">
+        <h2>お問い合わせ</h2>
+
+        <label for="name">お名前</label>
+        <input type="text" id="name" placeholder="山田 太郎">
+
+        <label for="email">メールアドレス</label>
+        <input type="email" id="email" placeholder="example@mail.com">
+
+        <label for="msg">メッセージ</label>
+        <textarea id="msg" rows="5" placeholder="お問い合わせ内容を入力してください"></textarea>
+
+        <button onclick="sendForm()">送信</button>
+
+        <div class="message" id="result"></div>
+    </div>
+
+
+ 
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>© 2026 ハヤシ タクミ. ALL rights reserved.</p>
+        </div>
+    </footer>
+      <script>
+        // スクロールイベントを監視
+        window.addEventListener('scroll', () => {
+            // 現在のスクロール量 (ピクセル)
+            const scrollY = window.scrollY;
+
+            // アニメーションさせる全体のスクロール量（sticky-areaの高さ等で調整）
+            // .scroll-container の高さ(300vh) - 画面の高さ(100vh) = 200vh分スクロール可能
+            // そこで、100%開ききるまでのスクロール量を設定 (ここでは1000pxで開ききるとする)
+            // ウィンドウサイズに合わせて柔軟にしても良いが、今回は固定係数で計算
+            const openSpeed = 2; // スクロールに対する開く速さ(倍率)
+
+            // 移動割合 (0〜100%)
+            // スクロール量に比例して100%（画面外まで）開く
+            let movePercent = (scrollY / window.innerHeight) * 100 * openSpeed;
+
+            // 100%を超えたら（開ききったら）、それ以上は動かさず100%で固定する
+            if (movePercent > 100) {
+                movePercent = 100;
+            } else if (movePercent < 0) {
+                movePercent = 0;
+            }
+
+            // 左右の扉の要素を取得
+            const doorLeft = document.getElementById('doorLeft');
+            const doorRight = document.getElementById('doorRight');
+
+            // translateXで左方向（マイナス）と右方向（プラス）へそれぞれ移動
+            doorLeft.style.transform = `translateX(-${movePercent}%)`;
+            doorRight.style.transform = `translateX(${movePercent}%)`;
+        });
+    </script>
+</body>
+</html>
